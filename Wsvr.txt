@@ -67,4 +67,3 @@ if WHITELISTED then
 elseif not WHITELISTED and not BLACKLISTED then
     user:Kick('It appears you arent whitelisted! '..name..'! Join Vrlock to buy and whitelist!')
 a.Text = "Not Whitelisted, Join Vrlock for a 500rbx Whitelist."
-end
