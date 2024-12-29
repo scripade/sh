@@ -34,7 +34,7 @@ end
 --Whitelist Checker
 local BL = {
 "bedthewar1", --Lol ur gay
-"", -- Ur twice as gay as ROBLOX
+"im_cheater488", -- Ur twice as gay as ROBLOX
 "IoIman616", --Creator of IY is meaniebutface head
 "404TestAcc404", --My alt but blacklisted for testing
 "Fadedfade", -- Lol ur the worst cousin ever, BITCH!
@@ -51,7 +51,7 @@ table.foreach(BL,function(a,b)
        end       
 end)
 local WL = {
-"D3F4ULTL00K",
+"im_cheater488",
 "bedthewar1",
 "StrictlyMusic",
 "garyshaw3",
