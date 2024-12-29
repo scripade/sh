@@ -1,4 +1,5 @@
-game:GetService('Players').LocalPlayer.Name = "FionaWolfgang"
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 table.foreach(workspace:GetChildren(),function(a,b) if b.Name == "Anti Stuff" then b:Destroy() end end)
 wait(1)
 local version = "1.3 (6/26/2018)"
@@ -33,7 +34,7 @@ end
 --Whitelist Checker
 local BL = {
 "bedthewar1", --Lol ur gay
-"Ia", -- Ur twice as gay as ROBLOX
+"", -- Ur twice as gay as ROBLOX
 "IoIman616", --Creator of IY is meaniebutface head
 "404TestAcc404", --My alt but blacklisted for testing
 "Fadedfade", -- Lol ur the worst cousin ever, BITCH!
@@ -51,7 +52,7 @@ table.foreach(BL,function(a,b)
 end)
 local WL = {
 "D3F4ULTL00K",
-"FionaWolfgang",
+"bedthewar1",
 "StrictlyMusic",
 "garyshaw3",
 "IStrictlyExploit",
@@ -67,4 +68,3 @@ elseif not WHITELISTED and not BLACKLISTED then
     user:Kick('It appears you arent whitelisted! '..name..'! Join Vrlock to buy and whitelist!')
 a.Text = "Not Whitelisted, Join Vrlock for a 500rbx Whitelist."
 end
-
