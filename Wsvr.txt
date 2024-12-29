@@ -36,7 +36,7 @@ local BL = {
 "bedthewar1", --Lol ur gay
 "im_cheater488", -- Ur twice as gay as ROBLOX
 "jduejusdisback1s", --Creator of IY is meaniebutface head
-"404TestAcc404", --My alt but blacklisted for testing
+"binxyuh7", --My alt but blacklisted for testing
 "Fadedfade", -- Lol ur the worst cousin ever, BITCH!
 "pretitdor101", -- haha blacklisted
 }
@@ -54,7 +54,7 @@ local WL = {
 "im_cheater488",
 "bedthewar1",
 "jduejusdisback1s",
-"garyshaw3",
+"binxyuh7",
 "IStrictlyExploit",
 "L0LIP0PF4IL",
 "DangoFreeze",
