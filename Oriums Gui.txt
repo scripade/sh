@@ -1,0 +1,336 @@
+-- Main GUI
+local screenGui = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+
+screenGui.Name = "ScriptExecutorGUI"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+frame.Parent = screenGui
+frame.Size = UDim2.new(0, 300, 0, 400)
+frame.Position = UDim2.new(0.5, -150, 0.5, -200)
+frame.BackgroundColor3 = Color3.fromRGB(60, 50, 55)
+frame.BackgroundTransparency = 0.2
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+
+local UICornerMain = Instance.new("UICorner")
+UICornerMain.CornerRadius = UDim.new(0, 20)
+UICornerMain.Parent = frame
+
+local UIStrokeMain = Instance.new("UIStroke")
+UIStrokeMain.Parent = frame
+UIStrokeMain.Thickness = 4
+UIStrokeMain.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local function RainbowEffect(uiStroke)
+    local hue = 0
+    while true do
+        hue = (hue + 1) % 360
+        local color = Color3.fromHSV(hue / 360, 1, 1)
+        uiStroke.Color = color
+        wait(0.01)
+    end
+end
+
+spawn(function() RainbowEffect(UIStrokeMain) end)
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Parent = frame
+titleLabel.Size = UDim2.new(1, 0, 0, 40)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+titleLabel.BackgroundTransparency = 0.5
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.Text = "Vrlock Gui"
+titleLabel.Font = Enum.Font.SourceSans
+titleLabel.TextSize = 18
+titleLabel.TextStrokeTransparency = 0.5
+
+local UICornerTitle = Instance.new("UICorner")
+UICornerTitle.CornerRadius = UDim.new(0, 20)
+UICornerTitle.Parent = titleLabel
+
+local closeButton = Instance.new("TextButton")
+closeButton.Parent = frame
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -40, 0, 5)
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+closeButton.BackgroundTransparency = 0.5
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Text = "X"
+closeButton.Font = Enum.Font.SourceSans
+closeButton.TextSize = 14
+closeButton.TextStrokeTransparency = 0.5
+closeButton.BorderSizePixel = 0
+
+local UICornerClose = Instance.new("UICorner")
+UICornerClose.CornerRadius = UDim.new(0, 15)
+UICornerClose.Parent = closeButton
+
+-- Function to create a button with script loading capability
+local function createButton(name, script, position)
+    local button = Instance.new("TextButton")
+    button.Parent = frame
+    button.Size = UDim2.new(1, -20, 0, 50)
+    button.Position = UDim2.new(0, 10, 0, position)
+    button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    button.BackgroundTransparency = 0.3
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Text = name
+    button.Font = Enum.Font.SourceSans
+    button.TextSize = 16
+    button.TextStrokeTransparency = 0.5
+    button.BorderSizePixel = 2
+
+    local UICornerButton = Instance.new("UICorner")
+    UICornerButton.CornerRadius = UDim.new(0, 15)
+    UICornerButton.Parent = button
+
+    button.MouseButton1Click:Connect(function()
+        if script:match("^https?://") then
+            local success, result = pcall(function()
+                local response = game:HttpGet(script)
+                loadstring(response)()
+            end)
+            if not success then
+                print("Error loading script from URL: " .. result)
+            end
+        else
+            local success, result = pcall(loadstring(script))
+            if not success then
+                print("Error executing script: " .. result)
+            end
+        end
+    end)
+    return button
+end
+
+local scripts = {
+    {name = "Vrlock V1)", script = "https://pastebin.com/raw/3kSxeM4t"}, 
+    {name = "Vrlock V2", script = "https://raw.githubusercontent.com/Rikijan/Hhahahaha/refs/heads/main/obf_j9AvY792s1iiVe24929elT352Qojcr5EkVB4JwP4m011wMJRJRG4JOW4E0Rg8w07.lua.txt"}, 
+    {name = "Vrlock V3", script = "https://raw.githubusercontent.com/Rikijan/Hhahahaha/refs/heads/main/obf_UglNyMt104Ym4j7vUR4YPW8B2XrXq63gY9Fujt2BhlnwYHgecW9Sogb3c5u4nrzQ.lua.txt"}, 
+    {name = "VrResolver", script = "https://raw.githubusercontent.com/Rikijan/Hhahahaha/refs/heads/main/obf_83wTo9L148yf4Uyrjdh61gKI6bjfB9N0b2E37fYJ330TEmvK3965yzR7hMlDlO53.lua.txt"}, 
+    {name = "PVrTrigger", script = "
+
+-- Load the external script
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scripade/Fly-gui/refs/heads/main/flyguiv2.txt"))()
+
+-- TriggerBot Configuration
+TriggerBot = {
+    Enabled = true,            -- TriggerBot enabled by default
+    Visualize = true,          -- Visualize the FOV by default
+    Range = 28,              -- Range for the FOV circle (bigger range for better hits)
+    UseDelay = false,          -- Disable delay for immediate firing
+    Delay = 0.2,               -- Set delay to 0.02 or 0.2 if you want good delay.
+}
+
+-- Required Services
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+local LocalPlayer = Players.LocalPlayer
+local MainColor = Color3.fromRGB(173, 216, 230)
+
+-- FOV Visualization (circle to show where the TriggerBot will trigger)
+local TriggerBotFOV = Drawing.new("Circle")
+TriggerBotFOV.Transparency = 1
+TriggerBotFOV.Thickness = 1
+TriggerBotFOV.Radius = TriggerBot.Range
+TriggerBotFOV.Filled = false
+TriggerBotFOV.Color = MainColor
+TriggerBotFOV.Visible = TriggerBot.Visualize
+
+-- Function to get all players within the FOV range
+local function get_players_in_fov()
+    local playersInFov = {}
+    local mousePos = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)  -- Center of screen (crosshair)
+
+    -- Iterate through all players to find the ones in FOV range
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then
+            local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                local screenPos, onScreen = Camera:WorldToViewportPoint(hrp.Position)
+                if onScreen then
+                    -- Calculate the distance between the center of the screen and the player's position
+                    local distance = (Vector2.new(screenPos.X, screenPos.Y) - mousePos).Magnitude
+                    if distance <= TriggerBot.Range then
+                        table.insert(playersInFov, player)
+                    end
+                end
+            end
+        end
+    end
+    return playersInFov
+end
+
+-- Function to immediately lock on and shoot at all valid players in FOV
+local function lock_and_shoot()
+    if TriggerBot.Enabled then
+        -- Get all players within FOV range
+        local playersInFov = get_players_in_fov()
+
+        -- If there are players in the FOV
+        for _, closestPlayer in ipairs(playersInFov) do
+            if closestPlayer and closestPlayer.Character then
+                local hrp = closestPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+                -- If we have a HumanoidRootPart and the player has a tool equipped
+                if hrp and LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+                    local tool = LocalPlayer.Character:FindFirstChildOfClass("Tool")
+                    local toolName = tool.Name
+                    local validTool = toolName ~= "[Knife]" and toolName ~= "Wallet" and toolName ~= "Silent Aim Tool"
+
+                    if validTool then
+                        -- Directly aim at the target's HumanoidRootPart for perfect accuracy
+                        local aimPos = hrp.Position
+                        local screenPos, onScreen = Camera:WorldToViewportPoint(aimPos)
+
+                        if onScreen then
+                            -- Update the FOV position to the new target's position
+                            TriggerBotFOV.Position = Vector2.new(screenPos.X, screenPos.Y)
+                            TriggerBotFOV.Visible = TriggerBot.Visualize
+
+                            -- Handle firing if within range and crosshair is on target
+                            local mousePos = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+                            local distance = (mousePos - TriggerBotFOV.Position).Magnitude
+
+                            -- Immediate firing without delay when within range
+                            if distance <= TriggerBot.Range then
+                                tool:Activate()  -- Immediate firing
+                                TriggerBotFOV.Color = Color3.fromRGB(255, 0, 0) -- Red when firing
+                            else
+                                TriggerBotFOV.Color = MainColor -- Default color when not firing
+                            end
+                        else
+                            TriggerBotFOV.Visible = false
+                        end
+                    else
+                        TriggerBotFOV.Visible = false
+                    end
+                else
+                    TriggerBotFOV.Visible = false
+                end
+            end
+        end
+    end
+end
+
+-- TriggerBot Logic (Main Logic for Activation)
+local triggerbot_last_tick = 0
+
+RunService.Heartbeat:Connect(function()
+    local now = tick()
+    if now - triggerbot_last_tick < 0 then return end -- Throttle to ~20FPS
+    triggerbot_last_tick = now
+
+    -- Call the lock and shoot function to check and shoot at valid targets
+    lock_and_shoot()
+end)
+
+-- Menu Configuration
+Menu.Container("Main", "Trigger Bot", "Right")
+Menu.CheckBox("Main", "Trigger Bot", "Enabled", TriggerBot.Enabled, function(a)
+    TriggerBot.Enabled = a
+end)
+
+Menu.TextBox("Main", "Trigger Bot", "Prediction", tostring(TriggerBot.Prediction), function(a)
+    TriggerBot.Prediction = tonumber(a)
+end)
+
+Menu.CheckBox("Main", "Trigger Bot", "Visualize", TriggerBot.Visualize, function(a)
+    TriggerBot.Visualize = a
+end)
+
+Menu.CheckBox("Main", "Trigger Bot", "Use Delay", TriggerBot.UseDelay, function(a)
+    TriggerBot.UseDelay = a
+end)
+
+Menu.TextBox("Main", "Trigger Bot", "Delay", tostring(TriggerBot.Delay), function(a)
+    TriggerBot.Delay = tonumber(a)
+end)
+
+Menu.Slider("Main", "Trigger Bot", "Range", 1, 100, TriggerBot.Range, "", 1, function(Value)
+    TriggerBot.Range = Value
+end)
+
+-- Load the external script
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scripade/sh/refs/heads/main/Wsvr.txt"))()"}, 
+
+for i, s in ipairs(scripts) do
+    createButton(s.name, s.script, 50 + (i - 1) * 55)
+end
+
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- Credits Labels
+local creditsLabel = Instance.new("TextLabel")
+creditsLabel.Parent = frame
+creditsLabel.Size = UDim2.new(1, -20, 0, 40)
+creditsLabel.Position = UDim2.new(0, 10, 1, -50)
+creditsLabel.BackgroundTransparency = 1
+creditsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+creditsLabel.Text = "enjoy!! (DefNotRiki)"
+creditsLabel.Font = Enum.Font.SourceSans
+creditsLabel.TextSize = 14
+creditsLabel.TextStrokeTransparency = 0.5
+creditsLabel.TextWrapped = true
+creditsLabel.TextYAlignment = Enum.TextYAlignment.Bottom
+
+-- Toggle GUI
+local ToggleGui = Instance.new("ScreenGui")
+local Toggle = Instance.new("TextButton")
+local UICornerToggle = Instance.new("UICorner")
+local UIStrokeToggle = Instance.new("UIStroke")
+
+ToggleGui.Name = "ToggleGui"
+ToggleGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ToggleGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ToggleGui.ResetOnSpawn = false
+
+Toggle.Name = "Toggle"
+Toggle.Parent = ToggleGui
+Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Toggle.Position = UDim2.new(0.5, -40, 0.05, 0)
+Toggle.Size = UDim2.new(0, 80, 0, 80)
+Toggle.Font = Enum.Font.SourceSans
+Toggle.Text = "Vrgui"
+Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Toggle.TextSize = 19.000
+Toggle.Draggable = true
+Toggle.BackgroundTransparency = 0.5
+
+UICornerToggle.CornerRadius = UDim.new(0, 20)
+UICornerToggle.Parent = Toggle
+
+UIStrokeToggle.Parent = Toggle
+UIStrokeToggle.Thickness = 3
+UIStrokeToggle.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+spawn(function() RainbowEffect(UIStrokeToggle) end)
+
+Toggle.MouseButton1Click:Connect(function()
+    frame.Visible = not frame.Visible
+end)
+
+local function showNotification()
+    local StarterGui = game:GetService("StarterGui")
+    StarterGui:SetCore("SendNotification", {
+        Title = "Info",
+        Text = "Type /e killtoggle To Kill The Toggle",
+        Duration = 60
+    })
+end
+
+showNotification()
+
+local function onChatMessage(message)
+    if message == "/e killtoggle" then
+        ToggleGui:Destroy()
+    end
+end
+
+game.Players.LocalPlayer.Chatted:Connect(onChatMessage)
