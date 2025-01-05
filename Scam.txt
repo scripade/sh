@@ -22,14 +22,14 @@ local StarterGui = game:GetService("StarterGui")
 
 local CamlockState = true
 local SelectedTarget = nil
-local Prediction = 0.206015
-local JumpOffset = 2.50
+local Prediction = 0.2198345763876367432423
+local JumpOffset = 0.92
 local currentHighlight = nil
 local AutoClickerEnabled = true
-local CameraSmoothness = 0.999
+local CameraSmoothness = 0.1
 local JumpSmoothness = 0.1
 local FlickSmoothness = 0.1
-local CurrentJumpOffset = 2.50
+local CurrentJumpOffset = 0.92
 local FlickRotation = 1.25
 
 -- Function to create and adjust the highlight effect
