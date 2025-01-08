@@ -5,7 +5,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/scripade/Fly-gui/refs
 TriggerBot = {
     Enabled = true,            -- TriggerBot enabled by default
     Visualize = true,          -- Visualize the FOV by default
-    Range = 30,              -- Range for the FOV circle (bigger range for better hits)
+    Range = 28,              -- Range for the FOV circle (bigger range for better hits)
     UseDelay = false,          -- Disable delay for immediate firing
     Delay = 0.2,               -- Set delay to 0.02 or 0.2 if you want good delay.
 }
